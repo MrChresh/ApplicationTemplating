@@ -13,8 +13,6 @@ def updateZip(zipname, dstzipname, filename, replace, replaceto):
                     content = str(content.decode(encoding='utf8'))
                     # Modify the content of the file by replacing a string
                     content1 = content.replace(replace, replaceto)
-                    if content == content1:
-                        print('fuck')
                     # Write content
                     outzip.writestr(inzipinfo.filename, content1)
                 else:
