@@ -1,5 +1,4 @@
 import zipfile
-from spire.doc import *
 from pypdf import PdfWriter
 
 def updateZip(zipname, dstzipname, filename, replace, replaceto):
@@ -20,19 +19,13 @@ def updateZip(zipname, dstzipname, filename, replace, replaceto):
                     content = str(content.decode(encoding='utf8'))
                     outzip.writestr(inzipinfo.filename, content)
 
-updateZip('Bewerbung.odt', 'Bewerbung1.odt', 'content.xml', '11.09.2026', '18.09.2026')
+updateZip('Bewerbung.odt', 'Bewerbung1.odt', 'content.xml', '${company}', 'Test GmbH')
+# updateZip('Bewerbung1.odt', 'Bewerbung1.odt', 'content.xml', '${street}', 'Teststraße 1')
+# updateZip('Bewerbung1.odt', 'Bewerbung1.odt', 'content.xml', '${city}', '111111 Köln')
+# updateZip('Bewerbung1.odt', 'Bewerbung1.odt', 'content.xml', '${data}', '19.09.2026')
+# updateZip('Bewerbung1.odt', 'Bewerbung1.odt', 'content.xml', '${salutation}', 'Sehr geehrte Damen und Herren,')
 
-# Create a new Document object to load and manipulate the ODT file
-document = Document()
-
-# Load the ODT file into the Document object
-document.LoadFromFile('Bewerbung1.odt')
-
-# Save the loaded document as a PDF file
-document.SaveToFile('Bewerbung1.pdf', FileFormat.PDF)
-
-# Close the Document object to release resources
-document.Close()
+#TODO: convert Bewerbung1.odt to pdf
 
 # Create a writer object
 writer = PdfWriter()
