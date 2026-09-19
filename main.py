@@ -6,7 +6,6 @@ import json
 
 with open('config.json', encoding='utf-8') as json_file:
     config_data = json.load(json_file)
-    print(config_data['read'])
 
 def updateZip(zipname, dstzipname, filename, replace):
     with zipfile.ZipFile(zipname) as inzip, zipfile.ZipFile(dstzipname, "w") as outzip:
@@ -19,8 +18,6 @@ def updateZip(zipname, dstzipname, filename, replace):
                     content = str(content.decode(encoding='utf8'))
                     # Modify the content of the file by replacing a string
                     for key, value in replace.items():
-                        print(key)
-                        print(value)
                         content = content.replace(key, value)
                     # Write content
                     outzip.writestr(inzipinfo.filename, content)
