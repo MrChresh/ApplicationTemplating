@@ -1,8 +1,12 @@
 import zipfile
 from docx2pdf import convert
 from pypdf import PdfWriter
-
+import json
 #uv pip install docx2pdf pypdf
+
+with open('config.json', encoding='utf-8') as json_file:
+    config_data = json.load(json_file)
+    print(config_data['read'])
 
 def updateZip(zipname, dstzipname, filename, replace):
     with zipfile.ZipFile(zipname) as inzip, zipfile.ZipFile(dstzipname, "w") as outzip:
@@ -25,27 +29,20 @@ def updateZip(zipname, dstzipname, filename, replace):
                     content = str(content.decode(encoding='utf8'))
                     outzip.writestr(inzipinfo.filename, content)
 
-updateZip('Bewerbung.docx', 'Bewerbung1.docx', 'word/document.xml', {'xxcompanyxx': 'Test GmbH',
-                                                                'xxstreetxx': 'Teststraße 1',
-                                                                'xxcityxx': '111111 Köln',
-                                                                'xxdatexx': '19.09.2026',
-                                                                'xxsalutationxx': 'Sehr geehrte Damen und Herren,'
-                                                                })
+updateZip(config_data['read'], 'temp/tempfile.docx', 'word/document.xml', config_data['replace'])
 
-# Convert Bewerbung1.odt to pdf (styles and fonts are preserved by LibreOffice)
-#OdtToPdfConverter().convert("Bewerbung1.odt", "Bewerbung1.pdf")
-convert('Bewerbung1.docx', 'Bewerbung1.pdf')
+convert('temp/tempfile.docx', 'temp/tempfile1.pdf')
 
 # Create a writer object
 writer = PdfWriter()
 
-writer.append('Bewerbung1.pdf')
-writer.append('LebenslaufSergeBerger.pdf')
-writer.append('InfoschreibenKooperationsbetriebe.pdf')
-writer.append('ZeugnisRealschule.pdf')
+writer.append('temp/tempfile1.pdf')
+
+for value in config_data['append']:
+    writer.append(value)
 
 # Write the combined file to disk
-with open('Bewerbung.pdf', 'wb') as output_file:
+with open(config_data['out'], 'wb') as output_file:
     writer.write(output_file)
 
 # Close the writer
