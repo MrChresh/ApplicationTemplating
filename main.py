@@ -1,11 +1,20 @@
+import sys
 import zipfile
 from docx2pdf import convert
 from pypdf import PdfWriter
 import json
 #uv pip install docx2pdf pypdf
 
+
 with open('config.json', encoding='utf-8') as json_file:
     config_data = json.load(json_file)
+
+if len(sys.argv) > 1:
+    if sys.argv[1] == '--manual':
+        for key, value in config_data['replace'].items():
+            print(key + ': ')
+            config_data['replace'][key] = input()
+            print('\n')
 
 def updateZip(zipname, dstzipname, filename, replace):
     with zipfile.ZipFile(zipname) as inzip, zipfile.ZipFile(dstzipname, "w") as outzip:
