@@ -1,0 +1,1 @@
+uv run --with pyinstaller pyinstaller --onefile main.py

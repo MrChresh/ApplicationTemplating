@@ -1,0 +1,12 @@
+{
+    "read": "Bewerbung.docx",
+    "replace": {
+        "xxcompanyxx": "Unternehmen GmbH",
+        "xxstreetxx": "Unternemensstraße 1",
+        "xxcityxx": "40217 Düsseldorf",
+        "xxdatexx": "19.09.2026",
+        "xxsalutationxx": "Sehr geehrte Damen und Herren,"
+    },
+    "append": ["LebenslaufSergeBerger.pdf", "InfoschreibenKooperationsbetriebe.pdf", "ZeugnisRealschule.pdf"],
+    "out": "Bewerbung.pdf"
+}

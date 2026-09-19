@@ -5,3 +5,12 @@ temp/tempfile.docx
 InfoschreibenKooperationsbetriebe.pdf
 LebenslaufSergeBerger.pdf
 ZeugnisRealschule.pdf
+dist/Bewerbung.docx
+dist/Bewerbung.pdf
+dist/temp/tempfile1.pdf
+dist/temp/tempfile.docx
+dist/InfoschreibenKooperationsbetriebe.pdf
+dist/LebenslaufSergeBerger.pdf
+dist/ZeugnisRealschule.pdf
+build
+main.spec
