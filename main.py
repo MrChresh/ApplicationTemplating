@@ -38,7 +38,7 @@ def updateZip(zipname, dstzipname, filename, replace):
 
 
 def generate(config_data, replace):
-    updateZip(config_data['read'], 'temp/tempfile.docx', TEMPLATE_PART, replace)
+    updateZip('input/' + config_data['read'], 'temp/tempfile.docx', TEMPLATE_PART, replace)
 
     convert('temp/tempfile.docx', 'temp/tempfile1.pdf')
 
@@ -48,7 +48,7 @@ def generate(config_data, replace):
     writer.append('temp/tempfile1.pdf')
 
     for value in config_data['append']:
-        writer.append(value)
+        writer.append('input/' + value)
 
     # Write the combined file to disk
     with open(config_data['out'], 'wb') as output_file:
