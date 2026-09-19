@@ -21,7 +21,6 @@ Fill placeholders in a Word (`.docx`) template and merge the result with additio
 
 ![Output files](images/dist.png)
 
-For scripted use, `runManual.bat` (`--manual`) prompts for each value in the terminal instead of opening the GUI.
 
 ## Configuration (`config.json`)
 
