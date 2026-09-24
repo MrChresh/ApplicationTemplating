@@ -1,12 +1,14 @@
+import os
 import sys
 import threading
 import zipfile
+import pythoncom
 from docx2pdf import convert
 from pypdf import PdfWriter
 import json
 from tkinter import Button, Entry, Label, Tk, END
 
-#uv pip install docx2pdf pypdf
+#uv pip install docx2pdf pypdf pywin32
 
 CONFIG_FILE = 'config.json'
 TEMPLATE_PART = 'word/document.xml'
@@ -37,10 +39,19 @@ def updateZip(zipname, dstzipname, filename, replace):
                     outzip.writestr(inzipinfo.filename, content)
 
 
+def convertToPdf(input_path, output_path):
+    """Convert via Word COM; COM must be initialized for the calling thread first."""
+    pythoncom.CoInitialize()
+    try:
+        convert(input_path, output_path)
+    finally:
+        pythoncom.CoUninitialize()
+
+
 def generate(config_data, replace):
     updateZip('input/' + config_data['read'], 'temp/tempfile.docx', TEMPLATE_PART, replace)
 
-    convert('temp/tempfile.docx', 'temp/tempfile1.pdf')
+    convertToPdf(os.path.abspath('temp/tempfile.docx'), os.path.abspath('temp/tempfile1.pdf'))
 
     # Create a writer object
     writer = PdfWriter()
